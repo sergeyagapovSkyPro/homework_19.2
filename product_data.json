@@ -1,0 +1,1 @@
+[{"model": "catalog.product", "pk": 1, "fields": {"name": "Рибай", "description": "Отруб толстого края", "image": "catalog/jAvb1yz.jpg", "price": 5000.0, "category": 2, "created_at": "2024-04-23T19:20:12Z", "updated_at": "2024-04-23T19:20:12Z"}}]
