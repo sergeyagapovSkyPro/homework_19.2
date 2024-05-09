@@ -2,19 +2,20 @@
 {% load my_tags %}
 {% block content %}
     <div class="row text-center">
-        {% for product in product_list %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="{{ product.image | media_filter }}">
+                    <img class="card-img-top" src="{{ product.image.url }}">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ product.description|slice:100 }}</li>
+                    </ul>
                     <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
-                    <a href="{% url 'catalog:product' product.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Kупить</button>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 {% endblock %}
