@@ -12,6 +12,12 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>{{ product.description }}</li>
                     </ul>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>Дата создания: {{product.created_at}}</li>
+                        </ul>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>Дата последнего изменения: {{product.updated_at}}</li>
+                         </ul>
                     <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Kупить</button>
                 </div>
