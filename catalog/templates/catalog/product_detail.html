@@ -5,20 +5,20 @@
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
+                    <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="{{ product.image.url }}">
+                    <img class="card-img-top" src="{{ object.image.url }}">
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>{{ product.description }}</li>
+                        <li>{{ object.description }}</li>
                     </ul>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li>Дата создания: {{product.created_at}}</li>
+                    <li>Дата создания: {{ object.created_at }}</li>
                         </ul>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li>Дата последнего изменения: {{product.updated_at}}</li>
+                    <li>Дата последнего изменения: {{ object.updated_at }}</li>
                          </ul>
-                    <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
+                    <h4 class="card-title pricing-card-title">{{ object.price }} руб.</h4>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Kупить</button>
                 </div>
             </div>
