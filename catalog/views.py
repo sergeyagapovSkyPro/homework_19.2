@@ -1,24 +1,31 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+from django.views.generic import TemplateView, ListView, DetailView
+
 from catalog.models import Product
 
 
-def home(request):
-    context = {'product_list': Product.objects.all()}
-    return render(request, 'catalog/home.html', context)
+class HomeListView(ListView):
+    model = Product
 
 
-def contacts(request):
-    if request.method == 'POST':
+class ContactsTemplateView(TemplateView):
+    template_name = "catalog/contacts.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Контакты"
+        return context
+
+    def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
-        print(f'Ваше сообщение: {name}, {phone}, {message}')
-        with open('write.txt', 'wt', encoding='UTF-8') as file:
-            file.write(f'Ваше сообщение: {name}, {phone}, {message}')
-
-    return render(request, 'catalog/contacts.html')
+        print(f'Имя: {name} \nТелефон: {phone} \nСообщение: {message}')
+        return HttpResponseRedirect(reverse('catalog:contacts'))
 
 
-def product(request, pk):
-    context = {'product': get_object_or_404(Product, pk=pk)}
-    return render(request, 'catalog/product.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+
