@@ -11,8 +11,6 @@ load_dotenv(PATH_DB)
 PASSWORD_DB = os.getenv("PASSWORD_DB")
 USER_DB = os.getenv("USER_DB")
 
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 

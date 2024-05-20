@@ -1,6 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
+<a href="{% url 'catalog:create' %}" type="button" class="btn btn-lg btn-block mb-5 btn-outline-primary">Добавить продукт</a>
     <div class="row text-center">
         {% for product in product_list %}
         <div class="col-3">
@@ -10,11 +11,17 @@
                 </div>
                 <div class="card-body">
                     <img class="card-img-top" src="{{ product.image | media_filter }}">
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <ul class="list-unstyled mt-6 mb-4 text-start m-3">
                         <li>{{ product.description|slice:100 }}</li>
                     </ul>
                     <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
-                    <a href="{% url 'catalog:product_view' product.pk %}" type="button" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                    <a href="{% url 'catalog:product_view' product.pk %}" type="button" class="btn btn-lg d-grid mb-2 btn-outline-primary">Подробнее</a>
+                    <a href="{% url 'catalog:update' product.pk %}" type="button" class="btn btn-lg d-grid mb-2 btn-outline-warning">Изменить</a>
+                    <a href="{% url 'catalog:delete' product.pk %}" type="button" class="btn btn-lg d-grid mb-2 btn-outline-danger">Удалить</a>
+                    {% for status in product.version.all %}
+                    <p>Активная версия:<strong>{{ status.name_version }}</strong></p>
+                    <p>Номер версии:<strong>{{ status.number_version }}</strong></p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
