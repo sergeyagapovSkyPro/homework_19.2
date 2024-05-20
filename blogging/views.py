@@ -2,7 +2,6 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
-
 from blogging.models import Blog
 
 
@@ -50,3 +49,13 @@ class BlogUpdateView(UpdateView):
 class BlogDeleteView(DeleteView):
     model = Blog
     success_url = reverse_lazy('blogging:list')
+
+
+def publication(request, pk):
+    publication_item = get_object_or_404(Blog, pk=pk)
+    if publication_item.is_published:
+        publication_item.is_published = False
+    else:
+        publication_item.is_published = True
+    publication_item.save()
+    return redirect(reverse('blogging:list'))

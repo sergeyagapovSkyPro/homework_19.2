@@ -1,27 +1,22 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
-    <div class="row text-center">
-        <div class="col-3">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
-                </div>
-                <div class="card-body">
-                    <img class="card-img-top" src="{{ object.image.url }}">
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>{{ object.description }}</li>
-                    </ul>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li>Дата создания: {{ object.created_at }}</li>
-                        </ul>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li>Дата последнего изменения: {{ object.updated_at }}</li>
-                         </ul>
+<div class="row text-center">
+    <div class="col-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
+            </div>
+            <div class="card-body">
+                <img class="card-img-top" src="{{ object.image | media_filter }}">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{ object.description }}</li>
                     <h4 class="card-title pricing-card-title">{{ object.price }} руб.</h4>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Kупить</button>
-                </div>
+                    <div class="d-grid gap-2 col-9 mx-auto">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Kупить</button>
+                    </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
