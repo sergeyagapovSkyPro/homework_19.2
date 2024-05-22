@@ -10,6 +10,20 @@ from catalog.models import Product, Version
 class HomeListView(ListView):
     model = Product
 
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        products = Product.objects.all()
+
+        for product in products:
+            versions = Version.objects.filter(product=product)
+            active_versions = versions.filter(version_flag=True)
+            if active_versions:
+                product.active_version = active_versions.last().name_version
+            else:
+                product.active_version = 'Нет активной версии'
+
+        context_data['object_list'] = products
+        return context_data
 
 class ContactsTemplateView(TemplateView):
     template_name = "catalog/contacts.html"
