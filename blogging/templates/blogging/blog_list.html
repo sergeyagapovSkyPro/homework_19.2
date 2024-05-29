@@ -3,9 +3,11 @@
 {% load my_tags %}
 <div class="container px-3 py-3 pt-md-5 pb-md-4">
     <div class="col-12 mb-5 pt-md-5">
+        {% if user.is_authenticated %}
         <a class="btn btn-outline-primary" href="{% url 'blogging:create' %}">Добавить отзыв</a>
+        {% endif %}
     </div>
-<div class="row text-center">
+    <div class="row text-center">
         {% for object in object_list %}
         <div class="col-4">
             <div class="card mb-4 box-shadow">
@@ -18,24 +20,26 @@
                         <li>{{ object.body|slice:100 }}</li>
                     </ul>
                     <div class="d-grid gap-2 col-9 mx-auto">
-                            <a href="{% url 'blogging:detail' object.pk %}" type="button"
-                                class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
-                            <a href="{% url 'blogging:update' object.pk %}" type="button"
-                                class="btn btn-lg btn-block btn-outline-primary">Изменить</a>
-                            <a href="{% url 'blogging:delete' object.pk %}" type="button"
-                                class="btn btn-lg btn-block btn-outline-primary">Удалить</a>
-                            {% if object.is_published %}
-                            <a href="{% url 'blogging:toogle_activity' object.pk %}" type="button"
-                               class="btn btn-lg btn-block btn-outline-primary">Деактивировать</a>
-                            {% else %}
-                            <a href="{% url 'blogging:toogle_activity' object.pk %}" type="button"
-                               class="btn btn-lg btn-block btn-outline-danger">Активировать</a>
-                            {% endif %}
-                        </div>
+                        <a href="{% url 'blogging:detail' object.pk %}" type="button"
+                           class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'blogging:update' object.pk %}" type="button"
+                           class="btn btn-lg btn-block btn-outline-warning">Изменить</a>
+                        <a href="{% url 'blogging:delete' object.pk %}" type="button"
+                           class="btn btn-lg btn-block btn-outline-danger">Удалить</a>
+                        {% if object.is_published %}
+                        <a href="{% url 'blogging:toogle_activity' object.pk %}" type="button"
+                           class="btn btn-lg btn-block btn-outline-danger">Деактивировать</a>
+                        {% else %}
+                        <a href="{% url 'blogging:toogle_activity' object.pk %}" type="button"
+                           class="btn btn-lg btn-block btn-outline-success">Активировать</a>
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 {% endblock %}

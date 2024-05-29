@@ -7,7 +7,7 @@ from common.views import StyleFormMixin
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'description', 'created_at', 'updated_at', 'price', 'image')
+        fields = ('name', 'description', 'created_at', 'updated_at', 'price', 'category', 'image',)
 
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')
