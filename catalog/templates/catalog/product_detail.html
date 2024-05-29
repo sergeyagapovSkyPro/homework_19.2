@@ -13,7 +13,8 @@
                     <li>{{ object.description }}</li>
                     <h4 class="card-title pricing-card-title">{{ object.price }} руб.</h4>
                     <div class="d-grid gap-2 col-9 mx-auto">
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Kупить</button>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-success">Kупить</button>
+                        <p class="card-title pricing-card-title">Владелец товара: {{ object.user.email }} </p>
                     </div>
             </div>
         </div>
