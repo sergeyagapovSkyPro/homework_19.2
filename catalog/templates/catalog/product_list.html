@@ -18,7 +18,7 @@
                     </ul>
                     <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
                     <a href="{% url 'catalog:product_view' product.pk %}" type="button" class="btn btn-lg d-grid mb-2 btn-outline-primary">Подробнее</a>
-                   {% if user.is_authenticated %}
+                    {% if user == product.user or perms.catalog.set_published_status and perms.catalog.change_description and perms.catalog.change_category or user.is_superuser %}
                     <a href="{% url 'catalog:update' product.pk %}" type="button" class="btn btn-lg d-grid mb-2 btn-outline-warning">Изменить</a>
                     <a href="{% url 'catalog:delete' product.pk %}" type="button" class="btn btn-lg d-grid mb-2 btn-outline-danger">Удалить</a>
                     <p>Активная версия: <strong>{{ product.active_version }}</strong></p>
