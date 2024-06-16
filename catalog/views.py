@@ -2,11 +2,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView
 from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 from catalog.models import Product, Version
+from catalog.services import get_product_from_cache
 
 
 class HomeListView(ListView):
@@ -14,7 +14,7 @@ class HomeListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
-        products = Product.objects.all()
+        products = get_product_from_cache()
 
         for product in products:
             versions = Version.objects.filter(product=product)
@@ -26,6 +26,11 @@ class HomeListView(ListView):
 
         context_data['object_list'] = products
         return context_data
+
+    def get_queryset(self, *args, **kwargs):
+        return get_product_from_cache()
+
+
 
 class ContactsTemplateView(TemplateView):
     template_name = "catalog/contacts.html"
